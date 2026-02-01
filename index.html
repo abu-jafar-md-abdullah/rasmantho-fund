@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasmantho Fund - সদস্য ফান্ড ব্যবস্থাপনা</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0b0e1a;
+            --primary-green: #00ff88;
+            --primary-green-dark: #00cc6a;
+            --secondary-blue: #1a73e8;
+            --light-bg: #f4f4f9;
+            --card-bg: #ffffff;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --border-radius: 16px;
+            --box-shadow: 0 10px 30px rgba(11, 14, 26, 0.1);
+            --box-shadow-hover: 0 15px 40px rgba(11, 14, 26, 0.15);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #f4f4f9 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><rect fill="%2300ff88" opacity="0.03" width="120" height="120"/><path d="M0,60 Q30,30 60,60 T120,60 L120,120 L0,120 Z" fill="%230b0e1a" opacity="0.03"/></svg>');
+            z-index: -1;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a1f3a 100%);
+            color: white;
+            padding: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .logo-icon i {
+            font-size: 24px;
+            color: var(--primary-dark);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--primary-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--primary-dark);
+            background: var(--primary-green);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: var(--primary-green-dark);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
+        }
+        
+        .nav-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: white;
+            box-shadow: none;
+        }
+        
+        .nav-btn.secondary:hover {
+            background: var(--primary-green);
+            color: var(--primary-dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .hero-content {
+            flex: 1;
+            animation: fadeInLeft 1s ease-out;
+        }
+        
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .hero-content h2 {
+            font-size: 2.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-content h2 span {
+            color: var(--primary-green);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-image {
+            flex: 1;
+            animation: fadeInRight 1s ease-out;
+        }
+        
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, var(--primary-dark), #1a1f3a);
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            opacity: 0.1;
+        }
+        
+        .image-placeholder::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--secondary-blue);
+            border-radius: 50%;
+            bottom: -75px;
+            left: -75px;
+            opacity: 0.1;
+        }
+        
+        .image-placeholder i {
+            font-size: 80px;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+            opacity: 0.8;
+        }
+        
+        .image-placeholder h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Features Section */
+        .features {
+            max-width: 1200px;
+            margin: 60px auto 40px;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h3 {
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-green);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .feature-icon i {
+            font-size: 28px;
+            color: var(--primary-dark);
+        }
+        
+        .feature-card h4 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+        
+        /* Call to Action */
+        .cta {
+            max-width: 1200px;
+            margin: 70px auto 40px;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a1f3a 100%);
+            border-radius: var(--border-radius);
+            text-align: center;
+            color: white;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+            opacity: 0.1;
+        }
+        
+        .cta::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--secondary-blue);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            opacity: 0.1;
+        }
+        
+        .cta h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary-dark);
+            background: var(--primary-green);
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .cta-btn:hover {
+            background: var(--primary-green-dark);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
+        }
+        
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: white;
+        }
+        
+        .cta-btn.secondary:hover {
+            background: var(--primary-green);
+            color: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #0f1324 100%);
+            color: white;
+            padding: 50px 20px 30px;
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .footer-logo-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-green);
+        }
+        
+        .footer-links h4, .footer-contact h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-green);
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .footer-contact i {
+            color: var(--primary-green);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.4rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            
+            .cta {
+                padding: 40px 20px;
+            }
+            
+            .cta h3 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .feature-card {
+                padding: 25px 20px;
+            }
+            
+            .section-title h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Rasmantho Fund</h1>
+                    <p>সদস্য ফান্ড ব্যবস্থাপনা</p>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <a href="login.html" class="nav-btn">
+                    <i class="fas fa-sign-in-alt"></i> লগইন
+                </a>
+                <a href="rules.html" class="nav-btn secondary">
+                    <i class="fas fa-file-contract"></i> নিয়মাবলী
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>স্বাগতম <span>Rasmantho Fund</span>-এ</h2>
+            <p>
+                এটি Rasmantho টিমের সদস্যদের জন্য তৈরি একটি বিশেষ প্ল্যাটফর্ম। 
+                এখানে আপনি আপনার ফান্ড কন্ট্রিবিউশন দেখতে পারবেন, পেমেন্ট হিস্ট্রি ট্র্যাক করতে পারবেন, 
+                এবং ৩ মাসের চক্র অনুযায়ী আপনার অবদানের সম্পূর্ণ হিসাব জানতে পারবেন।
+            </p>
+            <div class="cta-buttons" style="justify-content: flex-start;">
+                <a href="login.html" class="cta-btn">
+                    <i class="fas fa-sign-in-alt"></i> এখনই লগইন করুন
+                </a>
+                <a href="rules.html" class="cta-btn secondary">
+                    <i class="fas fa-book"></i> নিয়মাবলী জানুন
+                </a>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <div class="image-placeholder">
+                <i class="fas fa-chart-line"></i>
+                <h3>ফান্ড ব্যবস্থাপনা ড্যাশবোর্ড</h3>
+                <p>সহজে ট্র্যাক করুন আপনার সকল কন্ট্রিবিউশন</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-title">
+            <h3>আমাদের প্রধান বৈশিষ্ট্যসমূহ</h3>
+            <p>Rasmantho Fund প্ল্যাটফর্মে যা যা সুবিধা পাবেন</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h4>কন্ট্রিবিউশন ট্র্যাকিং</h4>
+                <p>প্রতিদিনের, সাপ্তাহিক ও মাসিক কন্ট্রিবিউশনের সম্পূর্ণ বিশ্লেষণ ও ট্র্যাকিং</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h4>৩ মাসের চক্র</h4>
+                <p>স্বয়ংক্রিয়ভাবে ৩ মাসের চক্র অনুযায়ী কন্ট্রিবিউশন রেট পরিবর্তন</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>নিরাপদ লেনদেন</h4>
+                <p>সমস্ত লেনদেন সুরক্ষিত এবং সম্পূর্ণ স্বচ্ছতা বজায় রাখা হয়</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h4>পেমেন্ট হিস্ট্রি</h4>
+                <p>সম্পূর্ণ পেমেন্ট ইতিহাস যেকোনো সময় দেখতে পারবেন এবং ডাউনলোড করতে পারবেন</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <h3>আজই যোগ দিন Rasmantho Fund-এ</h3>
+        <p>
+            সকল সদস্যদের জন্য কন্ট্রিবিউশন বাধ্যতামূলক। 
+            বিস্তারিত ফান্ড নিয়মাবলী দেখতে এবং আপনার কন্ট্রিবিউশন ব্যবস্থাপনা শুরু করতে এখনই লগইন করুন।
+        </p>
+        <div class="cta-buttons">
+            <a href="login.html" class="cta-btn">
+                <i class="fas fa-sign-in-alt"></i> সদস্য লগইন
+            </a>
+            <a href="rules.html" class="cta-btn secondary">
+                <i class="fas fa-file-alt"></i> বিস্তারিত নিয়মাবলী
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon" style="width: 40px; height: 40px;">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div class="footer-logo-text">
+                    <h3>Rasmantho Fund</h3>
+                    <p style="color: #ccc; max-width: 250px;">সদস্যদের সহযোগিতায় গড়ে উঠা টিম ফান্ড ব্যবস্থাপনা প্ল্যাটফর্ম</p>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>দ্রুত লিংক</h4>
+                <ul>
+                    <li><a href="index.html">হোম পেজ</a></li>
+                    <li><a href="login.html">লগইন পেজ</a></li>
+                    <li><a href="rules.html">নিয়মাবলী ও পলিসি</a></li>
+                    <li><a href="#">কন্ট্রিবিউশন গাইড</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>যোগাযোগ</h4>
+                <p><i class="fas fa-envelope"></i> support@rasmanthofund.com (coming)</p>
+                <p><i class="fas fa-phone"></i> +880 1711999557 (Only WhatsApp)</p>
+                <p><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; ২০২৬ Rasmantho Team. সকল অধিকার সংরক্ষিত।</p>
+            <p style="margin-top: 5px;">এই প্ল্যাটফর্ম শুধুমাত্র Rasmantho টিমের সদস্যদের জন্য</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animation for feature cards on scroll
+        const featureCards = document.querySelectorAll('.feature-card');
+        
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Set initial state for animation
+        featureCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // Add hover effect to feature cards
+        featureCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('animated')) {
+                    this.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

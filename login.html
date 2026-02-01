@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লগইন | Rasmantho Fund</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0b0e1a;
+            --primary-green: #00ff88;
+            --primary-green-dark: #00cc6a;
+            --secondary-blue: #1a73e8;
+            --light-bg: #f4f4f9;
+            --card-bg: #ffffff;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --border-radius: 16px;
+            --box-shadow: 0 15px 35px rgba(11, 14, 26, 0.1);
+            --box-shadow-hover: 0 20px 40px rgba(11, 14, 26, 0.15);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0b0e1a 0%, #1a1f3a 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><rect fill="%2300ff88" opacity="0.03" width="120" height="120"/><circle cx="60" cy="60" r="40" fill="%2300ff88" opacity="0.05"/></svg>');
+            z-index: -1;
+        }
+        
+        /* Decorative Elements */
+        .decoration {
+            position: fixed;
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .dec-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-blue));
+            top: -150px;
+            right: -150px;
+        }
+        
+        .dec-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-green));
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        .dec-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--primary-green);
+            top: 50%;
+            left: 10%;
+            opacity: 0.05;
+        }
+        
+        /* Main Login Container */
+        .login-container {
+            display: flex;
+            width: 100%;
+            max-width: 1000px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Left Panel - Branding */
+        .brand-panel {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a1f3a 100%);
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-blue));
+        }
+        
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .logo-icon i {
+            font-size: 28px;
+            color: var(--primary-dark);
+        }
+        
+        .brand-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--primary-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .brand-tagline {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .features {
+            margin-top: 30px;
+        }
+        
+        .features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        
+        .features li i {
+            color: var(--primary-green);
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        
+        /* Right Panel - Login Form */
+        .login-panel {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .login-header h1 {
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .login-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        /* Form Styles */
+        .login-form {
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 1.05rem;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-family: 'Hind Siliguri', sans-serif;
+            transition: var(--transition);
+            background-color: #f8fafc;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #a0aec0;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            color: var(--primary-dark);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            font-family: 'Hind Siliguri', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .submit-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 255, 136, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Links Section */
+        .login-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--text-light);
+        }
+        
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        
+        .divider span {
+            padding: 0 15px;
+            font-size: 0.95rem;
+        }
+        
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--primary-dark);
+            background: transparent;
+            border: 2px solid #e2e8f0;
+            padding: 14px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin: 8px;
+            width: calc(50% - 16px);
+            font-size: 1rem;
+        }
+        
+        .link-btn i {
+            margin-right: 10px;
+        }
+        
+        .link-btn:hover {
+            background: #f8fafc;
+            border-color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        .login-footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .login-footer a {
+            color: var(--primary-green-dark);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 900px) {
+            .login-container {
+                flex-direction: column;
+                max-width: 600px;
+            }
+            
+            .brand-panel {
+                padding: 40px 30px;
+            }
+            
+            .login-panel {
+                padding: 40px 30px;
+            }
+            
+            .link-btn {
+                width: 100%;
+                margin: 8px 0;
+            }
+            
+            .dec-1, .dec-2, .dec-3 {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .brand-panel, .login-panel {
+                padding: 30px 20px;
+            }
+            
+            .brand-name {
+                font-size: 1.8rem;
+            }
+            
+            .login-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .form-input {
+                padding: 14px 18px 14px 45px;
+            }
+            
+            .submit-btn {
+                padding: 16px;
+            }
+        }
+        
+        /* Animation for form elements */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .form-group, .submit-btn, .login-links {
+            animation: slideIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .form-group { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .submit-btn { animation-delay: 0.3s; }
+        .login-links { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+    <!-- Decorative Elements -->
+    <div class="decoration dec-1"></div>
+    <div class="decoration dec-2"></div>
+    <div class="decoration dec-3"></div>
+
+    <div class="login-container">
+        <!-- Left Panel - Branding -->
+        <div class="brand-panel">
+            <div class="brand-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div class="brand-name">Rasmantho Fund</div>
+            </div>
+            
+            <p class="brand-tagline">
+                সদস্যদের সহযোগিতায় গড়ে উঠা একটি টিম ফান্ড। 
+                আমাদের লক্ষ্য হলো সম্মিলিত প্রচেষ্টায় টিমের উন্নয়ন ও বৃদ্ধি নিশ্চিত করা।
+            </p>
+            
+            <div class="features">
+                <h3 style="margin-bottom: 20px; color: var(--primary-green);">ফিচার সমূহ:</h3>
+                <ul style="list-style: none;">
+                    <li><i class="fas fa-check-circle"></i> নিরাপদ ও সুরক্ষিত লগইন</li>
+                    <li><i class="fas fa-check-circle"></i> রিয়েল-টাইম কন্ট্রিবিউশন ট্র্যাকিং</li>
+                    <li><i class="fas fa-check-circle"></i> সম্পূর্ণ স্বচ্ছ ফান্ড ব্যবস্থাপনা</li>
+                    <li><i class="fas fa-check-circle"></i> সহজ ও ব্যবহারকারীবান্ধব ইন্টারফেস</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Panel - Login Form -->
+        <div class="login-panel">
+            <div class="login-header">
+                <h1>সদস্য লগইন</h1>
+                <p>আপনার একাউন্টে প্রবেশ করুন এবং ফান্ড ব্যবস্থাপনা শুরু করুন</p>
+            </div>
+
+            <form class="login-form" action="/backend/routes/auth.js" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="memberId">সদস্য আইডি</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input 
+                            type="text" 
+                            id="memberId" 
+                            name="memberId" 
+                            class="form-input" 
+                            placeholder="আপনার সদস্য আইডি লিখুন" 
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">পাসওয়ার্ড</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-input" 
+                            placeholder="আপনার পাসওয়ার্ড লিখুন" 
+                            required
+                        >
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-sign-in-alt"></i> লগইন করুন
+                </button>
+            </form>
+
+            <div class="login-links">
+                <div class="divider">
+                    <span>অথবা</span>
+                </div>
+                
+                <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                    <a href="rules.html" class="link-btn">
+                        <i class="fas fa-file-contract"></i> নিয়মাবলী দেখুন
+                    </a>
+                    <a href="index.html" class="link-btn">
+                        <i class="fas fa-home"></i> হোম পেজ
+                    </a>
+                </div>
+            </div>
+
+            <div class="login-footer">
+                <p>লগইনে সমস্যা? <a href="mailto:support@rasmantho.com">সাপোর্ট টিমের সাথে যোগাযোগ করুন</a></p>
+                <p style="margin-top: 10px;">&copy; ২০২৬ Rasmantho Fund. সর্বস্বত্ব সংরক্ষিত</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Password visibility toggle
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        // Form submission animation
+        const form = document.querySelector('.login-form');
+        form.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> লগইন হচ্ছে...';
+            submitBtn.disabled = true;
+            
+            // Simulate loading for demo purposes
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                // In a real app, the form would submit here
+                // For demo, we'll just show an alert
+                alert('ডেমো ভার্শন: লগইন তথ্য জমা দেওয়া হয়েছে। বাস্তব প্রয়োগে ব্যাকএন্ডে প্রক্রিয়াকরণ হবে।');
+            }, 1500);
+            
+            // Prevent actual form submission for this demo
+            e.preventDefault();
+        });
+        
+        // Input focus effects
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('i').style.color = 'var(--primary-green)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.querySelector('i').style.color = 'var(--text-light)';
+            });
+        });
+    </script>
+
+</body>
+</html>

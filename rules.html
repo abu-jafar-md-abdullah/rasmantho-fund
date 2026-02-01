@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules & Policy | Rasmantho Fund</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0b0e1a;
+            --primary-green: #00ff88;
+            --primary-green-dark: #00cc6a;
+            --secondary-blue: #1a73e8;
+            --light-bg: #f4f4f9;
+            --card-bg: #ffffff;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #f4f4f9 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%230b0e1a" opacity="0.02" width="100" height="100"/><path d="M0,50 Q25,40 50,50 T100,50 L100,100 L0,100 Z" fill="%2300ff88" opacity="0.03"/></svg>');
+            z-index: -1;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a1f3a 100%);
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-blue));
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, var(--primary-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Main Content Styles */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 35px;
+            transition: var(--transition);
+            border-left: 5px solid var(--primary-green);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 255, 136, 0.1);
+        }
+        
+        .card-icon {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+        
+        .card-icon i {
+            font-size: 24px;
+            color: var(--primary-dark);
+        }
+        
+        .card-header h2 {
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        /* Rules List Styles */
+        .rules-list {
+            list-style: none;
+        }
+        
+        .rules-list li {
+            position: relative;
+            padding: 15px 0 15px 35px;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+        }
+        
+        .rules-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .rules-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 15px;
+            background: var(--primary-green);
+            color: var(--primary-dark);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .rules-list li strong {
+            color: var(--primary-dark);
+        }
+        
+        .sublist {
+            list-style: none;
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        
+        .sublist li {
+            padding: 8px 0 8px 25px;
+            border-bottom: none;
+        }
+        
+        .sublist li::before {
+            content: '•';
+            background: transparent;
+            color: var(--primary-green-dark);
+            font-size: 24px;
+            width: auto;
+            height: auto;
+            top: 5px;
+        }
+        
+        /* Contribution Cycle Styles */
+        .contribution-cycle {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .cycle-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            border-top: 4px solid var(--primary-green);
+            transition: var(--transition);
+        }
+        
+        .cycle-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cycle-card.month-2 {
+            border-top-color: var(--secondary-blue);
+        }
+        
+        .cycle-card.month-3 {
+            border-top-color: #ff6b6b;
+        }
+        
+        .cycle-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        .cycle-card .amount {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 15px 0;
+        }
+        
+        .cycle-card .amount span {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        
+        /* Navigation Styles */
+        nav {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--primary-dark);
+            background: var(--primary-green);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+            min-width: 180px;
+        }
+        
+        .nav-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .nav-btn:hover {
+            background: var(--primary-green-dark);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
+        }
+        
+        .nav-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-dark);
+            box-shadow: none;
+        }
+        
+        .nav-btn.secondary:hover {
+            background: var(--primary-green);
+            color: var(--primary-dark);
+        }
+        
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a1f3a 100%);
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-blue));
+        }
+        
+        footer p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+        
+        .copyright {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                margin: 25px auto;
+                gap: 20px;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .card-header h2 {
+                font-size: 1.6rem;
+            }
+            
+            .card-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .card-icon i {
+                font-size: 20px;
+            }
+            
+            .contribution-cycle {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .card-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .cycle-card .amount {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Rasmantho Fund Rules & Policy</h1>
+            <p>সুষ্ঠু পরিচালনা ও টিমের উন্নয়নের জন্য প্রয়োজনীয় নিয়মাবলী</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h2>অবদান সংক্রান্ত নিয়মাবলী</h2>
+            </div>
+            <ul class="rules-list">
+                <li><strong>বাধ্যতামূলক অবদান:</strong> সকল সদস্যদের জন্য অবদান বাধ্যতামূলক।</li>
+                <li><strong>দৈনিক হার:</strong> প্রতিদিন ১০ টাকা জমা দিতে হবে। চাইলে মাসিক একসাথে পরিশোধ করতে পারবে।</li>
+                <li><strong>৩ মাসের চক্র:</strong> ৩ মাসের চক্র অনুযায়ী অবদান পরিবর্তিত হবে:
+                    <ul class="sublist">
+                        <li><strong>১ম মাস:</strong> ১০ টাকা/দিন</li>
+                        <li><strong>২য় মাস:</strong> ২০ টাকা/দিন</li>
+                        <li><strong>৩য় মাস:</strong> ৩০ টাকা/দিন</li>
+                    </ul>
+                </li>
+                <li><strong>চক্র পুনরারম্ভ:</strong> ৩ মাস পূর্ণ হলে অবদান আবার ১০ টাকা/দিন থেকে শুরু হবে।</li>
+                <li><strong>বকেয়া পরিশোধ:</strong> যেকোনো মাসের বকেয়া অবশ্যই পরিশোধ করতে হবে।</li>
+                <li><strong>ব্যবহারের উদ্দেশ্য:</strong> অবদান শুধুমাত্র Rasmantho টিমের কাজে ব্যবহার করা হবে।</li>
+            </ul>
+            
+            <div class="contribution-cycle">
+                <div class="cycle-card month-1">
+                    <h3>প্রথম মাস</h3>
+                    <div class="amount">১০ <span>টাকা/দিন</span></div>
+                    <p>মোট মাসিক: ৩০০ টাকা</p>
+                </div>
+                <div class="cycle-card month-2">
+                    <h3>দ্বিতীয় মাস</h3>
+                    <div class="amount">২০ <span>টাকা/দিন</span></div>
+                    <p>মোট মাসিক: ৬০০ টাকা</p>
+                </div>
+                <div class="cycle-card month-3">
+                    <h3>তৃতীয় মাস</h3>
+                    <div class="amount">৩০ <span>টাকা/দিন</span></div>
+                    <p>মোট মাসিক: ৯০০ টাকা</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2>ফান্ড ব্যবহারের নীতিমালা</h2>
+            </div>
+            <ul class="rules-list">
+                <li>এই ফান্ড ব্যবহার হবে শুধুমাত্র Rasmantho-এর উন্নয়ন ও বৃদ্ধির জন্য।</li>
+                <li>ডোমেইন/হোস্টিং এবং প্রয়োজনীয় টুলস ক্রয় ও রক্ষণাবেক্ষণে ব্যবহার করা যাবে।</li>
+                <li>মার্কেটিং ও প্রমোশনাল কার্যক্রমে বিনিয়োগ করা যাবে।</li>
+                <li>জরুরী পরিস্থিতি ও সাপোর্ট সিস্টেমের জন্য ব্যবহার করা যাবে।</li>
+                <li>ভবিষ্যৎ প্রকল্প ও নতুন উদ্যোগের জন্য বিনিয়োগ করা যাবে।</li>
+                <li><strong>নিষিদ্ধ:</strong> কোনো ব্যক্তি বা ব্যক্তিগত খরচে ব্যবহার করা যাবে না।</li>
+            </ul>
+        </section>
+    </main>
+
+    <nav>
+        <div class="nav-buttons">
+            <a href="login.html" class="nav-btn">
+                <i class="fas fa-sign-in-alt"></i> লগইন করুন
+            </a>
+            <a href="index.html" class="nav-btn secondary">
+                <i class="fas fa-home"></i> হোম পেজে ফিরে যান
+            </a>
+        </div>
+    </nav>
+
+    <footer>
+        <div class="footer-logo">Rasmantho Fund</div>
+        <p>সকল সদস্যের সহযোগিতায় গড়ে উঠা একটি টিম ফান্ড</p>
+        <p class="copyright">&copy; ২০২৬ Rasmantho Team. সর্বস্বত্ব সংরক্ষিত।</p>
+    </footer>
+
+</body>
+</html>
